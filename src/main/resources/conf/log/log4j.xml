@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<appender name="A1" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+		<param name="ConversionPattern"
+			value="%-d{yyyy-MM-dd HH:mm:ss} [%l]-[%p] %m%n"
+		/>
+		</layout>
+	</appender>
+
+	<appender name="R1" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${catalina.base}/logs/activity-petal/log.log"></param>
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="'_'yyyy-MM-dd'.log'"></param>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%-d{yyyy-MM-dd HH:mm:ss} [%l]-[%p] %m%n"
+			/>
+		</layout>
+		<!--过滤器设置输出的级别-->       
+        <!-- <filter class="org.apache.log4j.varia.LevelRangeFilter">       
+            <param name="levelMin" value="debug" />       
+            <param name="levelMax" value="warn" />       
+            <param name="AcceptOnMatch" value="true" />       
+        </filter>  -->
+	</appender>
+	
+	<appender name="R2" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${catalina.base}/logs/activity-petal/error.log"></param>
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="'_'yyyy-MM-dd'.log'"></param>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%-d{yyyy-MM-dd HH:mm:ss} [%l]-[%p] %m%n"
+			/>
+		</layout>
+		<!--过滤器设置输出的级别-->       
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">       
+            <param name="levelMin" value="error" />       
+            <param name="AcceptOnMatch" value="true" />       
+        </filter> 
+	</appender>
+	
+	<!--通过<logger></logger>的定义可以将各个包中的类日志输出到不同的日志文件中-->
+	<!--  additivity解釋：http://blog.csdn.net/w420372197/article/details/7165967 -->     
+ 	<logger name="com.wemalltech" additivity="true">        
+        <level value="debug" />        
+    </logger>     
+
+	<root>
+		<level value="info"/>
+		<appender-ref ref="A1"/>
+		<appender-ref ref="R1"/>
+		<appender-ref ref="R2"/>
+	</root>
+
+</log4j:configuration>
