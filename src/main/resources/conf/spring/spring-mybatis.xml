@@ -66,12 +66,12 @@
 	<!-- mybatis文件配置，扫描所有mapper文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="dataSource" p:configLocation="classpath:conf/mybatis/mybatis-config.xml"
-		p:mapperLocations="classpath:mapper/*.xml" /><!-- configLocation为mybatis属性 
+		p:mapperLocations="classpath:mapper/*.xml"  p:typeAliasesPackage="com.wemalltech.bean"/><!-- configLocation为mybatis属性 
 		mapperLocations为所有mapper -->
 
 	<!-- spring与mybatis整合配置，扫描所有dao -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-		p:basePackage="com.wemalltech.dao" p:sqlSessionFactoryBeanName="sqlSessionFactory" />
+	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer"
+		p:basePackage="com.wemalltech.dao" p:markerInterface="tk.mybatis.mapper.common.Mapper" p:sqlSessionFactoryBeanName="sqlSessionFactory" />
 
 	<!-- 对数据源进行事务管理 -->
 	<bean id="transactionManager"

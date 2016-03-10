@@ -1,6 +1,11 @@
 package com.wemalltech.bean;
 
-public class Test {
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+public class Activity {
+	@Id
+	@GeneratedValue(generator = "JDBC")
 	private int autoid;
 	
 	private String name;
