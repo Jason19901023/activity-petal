@@ -10,6 +10,7 @@
                 http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	
 	<!-- 扫描文件（自动将servicec层注入） -->
+	<context:component-scan base-package="com.wemalltech.env"></context:component-scan>
 	<context:component-scan base-package="com.wemalltech.service"></context:component-scan>
 
 	<!--****set place of database config properties**** -->

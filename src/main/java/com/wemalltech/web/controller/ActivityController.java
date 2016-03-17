@@ -18,6 +18,12 @@ public class ActivityController {
 	@Resource
 	private ActivityService activityService;
 	
+	@RequestMapping("/activity_list.do")
+	public ModelAndView main() {
+		Map<String, Object> model = new HashMap<String, Object>();
+		return new ModelAndView("activity/activity_list", model);
+	}
+	
 	@RequestMapping("/test.do")
 	public ModelAndView test() {
 		Map<String, Object> model = new HashMap<String, Object>();

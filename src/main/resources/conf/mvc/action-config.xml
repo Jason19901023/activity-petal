@@ -40,7 +40,7 @@
 				<prop key="time_format">HH:mm:ss</prop>
 				<prop key="number_format">0.######</prop>
 				<prop key="boolean_format">true,false</prop>
-				<prop key="auto_import">"/core/common.ftl" as common</prop><!--每个模板自动引入的头文件 -->
+				<prop key="auto_import">"/core/common.ftl" as common, "/core/framework.ftl" as framework</prop><!--每个模板自动引入的头文件 -->
 				<prop key="whitespace_stripping">true</prop>
 				<prop key="tag_syntax">auto_detect</prop>
 				<prop key="url_escaping_charset">utf-8</prop>
