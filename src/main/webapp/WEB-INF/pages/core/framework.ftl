@@ -161,9 +161,11 @@
 	                    </div>
 	                    <!-- END PAGE BAR -->
 	                    <!-- BEGIN PAGE TITLE-->
+	                    <!--
 	                    <h3 class="page-title"> Blank Page Layout
 	                        <small>blank page layout</small>
 	                    </h3>
+	                    -->
 	                    <!-- END PAGE TITLE-->
 	                    <!-- END PAGE HEADER-->
 	                    <#nested>

@@ -4,26 +4,53 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	*{
-		margin: 0;
-		padding: 0;
-	}
 	
-	body{
-		height: 100%;
-	}
-	
-	body {
-		background-color:red;
-	}
-	
-	.a {
-		margin-top:10px;
-	}
 	
 </style>
 </head>
 <body>
-	<div class="a">nihao</div>
+	<img src="petal/resource/img/petal.png" />
 </body>
 </html>
+<script src="resource/plugins/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script>
+//通过图片路径生成灰度处理过的图片
+function grayscale(i1, j1, k1){
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    var imgObj = new Image();
+    imgObj.src = 'petal/resource/img/petal.png';
+    canvas.width = imgObj.width;
+    canvas.height = imgObj.height;
+    ctx.drawImage(imgObj, 0, 0);
+    var imgPixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    for(var y = 0; y < imgPixels.height; y++){
+        for(var x = 0; x < imgPixels.width; x++){
+            var i = (y * i1) * imgPixels.width + x * j1;
+            var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / k1;
+            imgPixels.data[i] = avg;
+            imgPixels.data[i + 1] = avg;
+            imgPixels.data[i + 2] = avg;
+        }
+    }
+    ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+    return canvas.toDataURL();
+}
+
+
+window.onload =function() {
+
+for(var i=1; i<=9; i++) {
+	for(var j=1; j<=9; j++) {
+		for(var k=1; k<=9; k++) {
+		console.log(i+"-"+j+"-"+k);
+			var a = $('<img style="width:100px;"  />');
+			a.attr('ijk',i+'-'+j+'-'+k);
+			a.attr('src', grayscale(i, j ,k));
+			a.appendTo($('body'));
+		}
+	}
+}
+}
+
+</script>

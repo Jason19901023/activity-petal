@@ -1,9 +1,15 @@
 package com.wemalltech.bean;
 
+import java.text.ParseException;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang.time.DateUtils;
 
 /**
  * 活动
@@ -30,6 +36,30 @@ public class Activity {
 	private int status;	//活动状态	0：启用		1：禁用
 	
 	private int flag;	//删除标志	0：正常		1：已删除
+	
+	//接收表单输入的属性
+	@Transient
+	private String dateRange;	
+	
+	
+
+	public String getDateRange() {
+		if(StringUtils.isBlank(this.dateRange)) {
+			this.dateRange = DateFormatUtils.format(this.startDate, "yyyy-MM-dd hh:mm:ss")
+					+" - "
+					+DateFormatUtils.format(this.endDate, "yyyy-MM-dd hh:mm:ss");
+		}
+		return dateRange;
+	}
+
+	public void setDateRange(String dateRange) throws ParseException {
+		this.dateRange = dateRange;
+		String[] arr = this.dateRange.split(" - ");
+		String startDateStr = arr[0].trim();
+		String endDateStr = arr[1].trim();
+		this.startDate = DateUtils.parseDate(startDateStr, new String[]{"yyyy-MM-dd hh:mm:ss"});
+		this.endDate = DateUtils.parseDate(endDateStr, new String[]{"yyyy-MM-dd hh:mm:ss"});
+	}
 
 	public int getAutoid() {
 		return autoid;
