@@ -15,6 +15,8 @@ public class PetalRecord {
 	@GeneratedValue(generator = "JDBC")
 	private int autoid;
 	
+	private int activityAutoid;	//活动autoid
+	
 	private String openId;	//用户openId
 	
 	private Date getDate;	//获取花瓣时间
@@ -22,6 +24,15 @@ public class PetalRecord {
 	private String beacon;		//beacon组别
 	
 	private int flag;	//删除标志	0：正常		1：已删除
+	
+
+	public int getActivityAutoid() {
+		return activityAutoid;
+	}
+
+	public void setActivityAutoid(int activityAutoid) {
+		this.activityAutoid = activityAutoid;
+	}
 
 	public int getAutoid() {
 		return autoid;

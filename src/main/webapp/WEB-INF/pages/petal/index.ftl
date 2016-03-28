@@ -44,6 +44,22 @@
             background-position:center;
             height:7%;
             margin:3% 0;
+            position:relative;
+        }
+        
+        .sub-title>.music-switcher {
+        	position:absolute;
+        	cursor:pointer;
+        	right:10px;
+        	top:0px;
+        	width:40px;
+        	animation:rotate 5s linear 0s infinite;
+        	-webkit-animation:rotate 5s linear 0s infinite;
+        }
+        
+        
+        .sub-title>.music-switcher:hover {
+        	
         }
 
         .petal-main {
@@ -375,7 +391,9 @@
 <div class="title">
     <img src="${contextPath}/petal/resource/img/title.png" />
 </div>
-<div class="sub-title"></div>
+<div class="sub-title">
+	<img class="music-switcher" src="${contextPath}/petal/resource/img/music-switcher-open.png" onclick="controlBgMusic();" />
+</div>
 <div class="petal-main">
 
     <div id="petal-wrapper">
@@ -415,10 +433,14 @@
     <img src="${contextPath}/petal/resource/img/petal2.png" />
     <img src="${contextPath}/petal/resource/img/petal3.png" />
     <img src="${contextPath}/petal/resource/img/petal4.png" />
+    <img src="${contextPath}/petal/resource/img/gray-petal.png" />
+    <img src="${contextPath}/petal/resource/img/gray-petal2.png" />
+    <img src="${contextPath}/petal/resource/img/gray-petal3.png" />
+    <img src="${contextPath}/petal/resource/img/gray-petal4.png" />
 </div>
-<audio id="bg-audio" src="${contextPath}/petal/resource/audio/bg.mp3" autoplay loop></audio>
-<audio id="petal-audio" src="${contextPath}/petal/resource/audio/petal.mp3"></audio>
-<audio id="colorful-petal-audio" src="${contextPath}/petal/resource/audio/colorful-petal.mp3"></audio>
+<audio id="bg-audio" src="${contextPath}/petal/resource/audio/bg_small2.mp3" autoplay loop></audio>
+<audio id="petal-audio" src="${contextPath}/petal/resource/audio/petal_small.mp3"></audio>
+<audio id="colorful-petal-audio" src="${contextPath}/petal/resource/audio/colorful-petal_small.mp3"></audio>
 <div style="display:none;">
 <div id="dialog-1">
 	<img class="petal-icon" src="${contextPath}/petal/resource/img/petal-icon.png" />
@@ -428,12 +450,12 @@
 <div id="dialog-2">
 	<img class="petal-icon" src="${contextPath}/petal/resource/img/petal-icon.png" />
 	<p>您已成功使花儿绽放，点击领取属于您的奖品。</p>
-	<p>Ps，再集齐两朵花瓣还能召唤花神呢~</p>
+	<p>再集齐两朵花瓣还能召唤花神呢~</p>
 	<button class="dialog-btn" onclick="getPrizeOf2Petal()">领取奖品</button>
 </div>
 <div id="dialog-3">
 	<img class="petal-icon" src="${contextPath}/petal/resource/img/petal-icon.png" />
-	<p>您已成功收集到一枚花瓣。再收集一枚，就能召唤花神啦！</p>
+	<p>您已成功收集到三枚花瓣，再收集一枚，就能召唤花神啦！</p>
 	<button class="dialog-btn" onclick="closeDialog()">确&nbsp;&nbsp;定</button>
 </div>
 <div id="dialog-4">
@@ -451,17 +473,21 @@
 <script>
 	$(document).ready(function() {
 		document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+		setInterval(function() {
+			if($(document).scrollTop() > 0) {
+				$(document).scrollTop(0)
+			}
+		}, 100);
 	});
 	window.onload =function() {
 		$.ajaxSetup({
-		    error: function (x, e) {
-		        alert(e);
+		    error: function (jqXHR, textStatus, errorThrown ) {
+		        alert(errorThrown);
 		    }
 		});
 		loadGrayPetal();
 		initPetal();
 		getCurrentPetal();
-		//openDialog('温馨提示', 'dialog-4');
 	}
 	
 	//公共对话框
@@ -472,7 +498,8 @@
 		        'background-color:#E4FFCA; color:#666; height: 40px; line-height: 40px; border-radius: 5px 5px 0 0;'
 		    ],
 		    content: $('#'+contentDomId).html()	,
-		    style: 'color:#666; border:none; border-radius: 5px;'
+		    style: 'color:#666; border:none; border-radius: 5px;',
+		    shadeClose:false
 		});
 	}
 	
@@ -491,10 +518,15 @@
         $('#petal2 .petal-img').attr('src', petal2Url);
         $('#petal3 .petal-img').attr('src', petal3Url);
         $('#petal4 .petal-img').attr('src', petal4Url);
+        /*
         var grayPetalUrl = grayscale(petalUrl);
         var grayPetal2Url = grayscale(petal2Url);
         var grayPetal3Url = grayscale(petal3Url);
-        var grayPetal4Url = grayscale(petal4Url);
+        var grayPetal4Url = grayscale(petal4Url);*/
+        var grayPetalUrl = "${contextPath}/petal/resource/img/gray-petal.png";
+        var grayPetal2Url = "${contextPath}/petal/resource/img/gray-petal2.png";
+        var grayPetal3Url = "${contextPath}/petal/resource/img/gray-petal3.png";
+        var grayPetal4Url = "${contextPath}/petal/resource/img/gray-petal4.png";
         $('#petal .gray-petal-img').attr('src', grayPetalUrl);
         $('#petal2 .gray-petal-img').attr('src', grayPetal2Url);
         $('#petal3 .gray-petal-img').attr('src', grayPetal3Url);
@@ -516,8 +548,16 @@
     
     //通过后台获取当前区域的Beacon组别
     function getCurrentPetal() {
-    	$.getJSON('${contextPath}/petal/get_beacon.do', {'testNum':'${testNum}'}, function(data) {
-		 	unlockPetal(data.beacon, data.unlockCount);
+    	//alert('开始获取Beacon组别');
+    	//alert('openId:${(data.openId)!}');
+    	$.getJSON('${contextPath}/petal/get_beacon.do', {'testNum':'${testNum!}', 'activityAutoid':'${(activity.autoid)!}', 'openId':'${(data.openId)!}', 'uuid':'${(data.uuid)!}', 'major':'${(data.major)!}', 'minor':'${(data.minor)!}'}, function(data) {
+    		//alert('Beacon组别为：'+data.beacon);
+    		if(data.unlocked == false) {
+    			//alert('花瓣未被解封过，开始解封花瓣');
+			 	unlockPetal(data.beacon, data.unlockCount);
+    		} else {
+    			//alert('花瓣已被解封过，不解封花瓣');
+    		}
 		});
     }
     
@@ -534,14 +574,18 @@
 	    	} else if(beacon=='D') {
 	    		num =  '4';
 	    	}
+	    	//alert('开始呈现解封动画');
 	    	$('#petal'+num+' .gray-petal-img').transition({'scale':0}, 2000);
 	    	$('#petal'+num+' .petal-img').transition({'opacity':1, 'scale':1, complete:function() {
+	    		//alert('解封动画呈现完毕');
 	    		if(unlockCount == 4) {
 	    			showColorful();
-	    		}
-	    		setTimeout(function() {
-	    			openDialog('温馨提示', 'dialog-'+unlockCount);
-	    		},2000);
+	    		};
+	    		//alert('开始弹出对话框');
+    			openDialog('温馨提示', 'dialog-'+unlockCount);
+    			$.getJSON('${contextPath}/petal/unlock_petal.do', {'activityAutoid':'${(activity.autoid)!}', 'openId':'${(data.openId)!}', 'beacon':beacon}, function(data) {
+    				
+				});
 	    	}}, 2000);
 	    	var audio = document.getElementById("petal-audio");
 			audio.play();
@@ -568,8 +612,8 @@
         for(var y = 0; y < imgPixels.height; y++){
             for(var x = 0; x < imgPixels.width; x++){
             	//4,4,3
-                var i = (y * 5) * imgPixels.width + x * 5;
-                var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 4;
+                var i = (y * 6) * imgPixels.width + x * 4;
+                var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
                 imgPixels.data[i] = avg;
                 imgPixels.data[i + 1] = avg;
                 imgPixels.data[i + 2] = avg;
@@ -581,7 +625,7 @@
     
     //花开抽奖
     function getPrizeOf2Petal() {
-    	$.getJSON('${contextPath}/petal/lottery.do', {ticket:'${ticket!}', platformActivityId:'${(activity.platformActivityId)!}}'}, function(data) {
+    	$.getJSON('${contextPath}/petal/lottery.do', {ticket:'${ticket!}', platformActivityId:'${(activity.platformActivityId)!}'}, function(data) {
 		 	var qr = data.qr;
 		 	window.location.href = " http://res.rtmap.com/image/vs3/share/detail.html?id="+qr;  
 		});
@@ -589,10 +633,29 @@
     
     //花神抽奖
     function getPrizeOf4Petal() {
-    	$.getJSON('${contextPath}/petal/lottery.do', {ticket:'${ticket!}', platformActivityId:'${(activity.platformActivityId)!}}'}, function(data) {
+    	$.getJSON('${contextPath}/petal/lottery.do', {ticket:'${ticket!}', platformActivityId:'${(activity.platformActivityId)!}'}, function(data) {
 		 	var qr = data.qr;
 		 	window.location.href = " http://res.rtmap.com/image/vs3/share/detail.html?id="+qr;  
 		});
+    }
+    
+    //背景音乐开关
+    function controlBgMusic() {
+    	var audio = document.getElementById("bg-audio");
+    	if(audio!==null){             
+	            if(!audio.paused)  
+	            {                 
+	                audio.pause();// 这个就是暂停//audio.play();// 这个就是播放  
+	                $('.music-switcher').attr('src', '${contextPath}/petal/resource/img/music-switcher-close.png');
+	                $('.music-switcher').css('animation-play-state', 'paused');
+	                $('.music-switcher').css('-webkit-animation-play-state', 'paused');
+	            } else {
+	            	audio.play();// 这个就是暂停//audio.play();// 这个就是播放  
+	                $('.music-switcher').attr('src', '${contextPath}/petal/resource/img/music-switcher-open.png');
+	                $('.music-switcher').css('animation-play-state', 'running');
+	                $('.music-switcher').css('-webkit-animation-play-state', 'running');
+	            }
+	        }  
     }
     
     function test() {

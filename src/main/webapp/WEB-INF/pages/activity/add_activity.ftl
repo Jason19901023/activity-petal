@@ -49,12 +49,14 @@
                                 <input type="text" class="form-control" name="platformActivityId" placeholder="请输入营销平台抽奖ID">
                             </div>
                         </div>
+                        <#--
                         <div class="form-group">
                             <label class="col-md-3 control-label">营销平台抽奖接口</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="platformLotteryUrl" placeholder="请输入营销平台抽奖接口">
                             </div>
                         </div>
+                        -->
                         <div class="form-group">
 					        <label class="col-md-3 control-label">活动启用</label>
 					        <div class="col-md-9">
@@ -70,7 +72,7 @@
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
                                 <button type="submit" class="btn green">提交</button>
-                                <button type="button" class="btn default">取消</button>
+                                <button type="button" class="btn default" onclick="history.go(-1);">取消</button>
                             </div>
                         </div>
                     </div>
@@ -85,14 +87,16 @@
 $(document).ready(function() {
 	$('#defaultrange').daterangepicker({
 	        timePicker: true,
+	        timePicker24Hour:true,
 	        locale: {
-		      format: 'YYYY-MM-DD hh:mm:ss'
+		      format: 'YYYY-MM-DD HH:mm:ss'
 		    },
 	        separator: ' to '
 	    },
 	    function (start, end) {
-	        $('#defaultrange input').val(start.format('YYYY-MM-DD hh:mm:ss') + ' - ' + end.format('YYYY-MM-DD hh:mm:ss'));
+	        $('#defaultrange input').val(start.format('YYYY-MM-DD HH:mm:ss') + ' - ' + end.format('YYYY-MM-DD HH:mm:ss'));
 	    }
-	);  
+	); 
+	
 });
 </script>

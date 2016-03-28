@@ -41,12 +41,14 @@
 	                            <div class="form-control">${activity.platformActivityId}</div>
                             </div>
                         </div>
+                        <#--
                         <div class="form-group">
                             <label class="col-md-3 control-label">营销平台抽奖接口</label>
                             <div class="col-md-9">
                             	<div class="form-control">${activity.platformLotteryUrl}</div>
                             </div>
                         </div>
+                        -->
                         <div class="form-group">
 					        <label class="col-md-3 control-label">活动启用</label>
 					        <div class="col-md-9">
@@ -62,6 +64,13 @@
 					        </div>
 					    </div>
                         
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="button" class="btn default" onclick="history.go(-1);">取消</button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

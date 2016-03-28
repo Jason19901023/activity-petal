@@ -68,7 +68,7 @@ public class ActivityController extends BaseController{
 		dbActivity.setEndDate(activity.getEndDate());
 		dbActivity.setCardsUrl(activity.getCardsUrl());
 		dbActivity.setPlatformActivityId(activity.getPlatformActivityId());
-		dbActivity.setPlatformLotteryUrl(activity.getPlatformLotteryUrl());
+//		dbActivity.setPlatformLotteryUrl(activity.getPlatformLotteryUrl());
 		dbActivity.setStatus(activity.getStatus());
 		activityService.updateActivity(dbActivity);
 		return new ModelAndView("redirect:/activity/activity_list.do", model);

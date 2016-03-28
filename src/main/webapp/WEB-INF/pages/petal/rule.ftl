@@ -61,6 +61,9 @@
         .petal-main {
             height:75%;
 			background-color:#C9F3B6;            
+			background-image:url('${contextPath}/petal/resource/img/rule-content2.png');
+			background-repeat:no-repeat;
+            background-size:100% auto;
         }
         
 
@@ -94,6 +97,7 @@
     <img src="${contextPath}/petal/resource/img/title.png" />
 </div>
 <div class="petal-main">
+	<#--
 	<h2>活动规则</h2>
     <p>游戏时间：2016年3月25日-3月27日</p>
     <p> 游戏步骤： </p>
@@ -101,6 +105,7 @@
     <p>2.ABCD四座分别散落着四种不同颜色的花瓣，顾客行至任意一座，即可获得一枚花瓣，该座花瓣点亮后，至其他座继续收集；</p>
     <p>3.任意集齐两枚不同颜色花瓣即可使花儿绽放，获得一份嘉年华专属惊喜；</p>
     <p>4.集齐四枚花瓣，即可召唤花神，嘉年华惊喜翻倍！</p>
+    -->
 </div>
 <div class="logo"></div>
 </body>

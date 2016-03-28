@@ -45,9 +45,9 @@ public class Activity {
 
 	public String getDateRange() {
 		if(StringUtils.isBlank(this.dateRange)) {
-			this.dateRange = DateFormatUtils.format(this.startDate, "yyyy-MM-dd hh:mm:ss")
+			this.dateRange = DateFormatUtils.format(this.startDate, "yyyy-MM-dd HH:mm:ss")
 					+" - "
-					+DateFormatUtils.format(this.endDate, "yyyy-MM-dd hh:mm:ss");
+					+DateFormatUtils.format(this.endDate, "yyyy-MM-dd HH:mm:ss");
 		}
 		return dateRange;
 	}
@@ -57,8 +57,8 @@ public class Activity {
 		String[] arr = this.dateRange.split(" - ");
 		String startDateStr = arr[0].trim();
 		String endDateStr = arr[1].trim();
-		this.startDate = DateUtils.parseDate(startDateStr, new String[]{"yyyy-MM-dd hh:mm:ss"});
-		this.endDate = DateUtils.parseDate(endDateStr, new String[]{"yyyy-MM-dd hh:mm:ss"});
+		this.startDate = DateUtils.parseDate(startDateStr, new String[]{"yyyy-MM-dd HH:mm:ss"});
+		this.endDate = DateUtils.parseDate(endDateStr, new String[]{"yyyy-MM-dd HH:mm:ss"});
 	}
 
 	public int getAutoid() {
