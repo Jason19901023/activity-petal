@@ -80,8 +80,8 @@
         .petal-main>#petal-wrapper {
         	height:100%;
         	position:absolute;
-        	animation:rotate 20s linear 0.5s infinite;
-        	-webkit-animation:rotate 20s linear 0.5s infinite;
+        	//animation:rotate 20s linear 0.5s infinite;
+        	//-webkit-animation:rotate 20s linear 0.5s infinite;
         }
         
         .petal-main>#petal-wrapper>.petal-ele {
@@ -429,10 +429,10 @@
 </div>
 <div class="logo"></div>
 <div style="display:none;">
-    <img src="${contextPath}/petal/resource/img/petal.png" />
-    <img src="${contextPath}/petal/resource/img/petal2.png" />
-    <img src="${contextPath}/petal/resource/img/petal3.png" />
-    <img src="${contextPath}/petal/resource/img/petal4.png" />
+    <img src="${contextPath}/petal/resource/img/text-petal.png" />
+    <img src="${contextPath}/petal/resource/img/text-petal2.png" />
+    <img src="${contextPath}/petal/resource/img/text-petal3.png" />
+    <img src="${contextPath}/petal/resource/img/text-petal4.png" />
     <img src="${contextPath}/petal/resource/img/gray-petal.png" />
     <img src="${contextPath}/petal/resource/img/gray-petal2.png" />
     <img src="${contextPath}/petal/resource/img/gray-petal3.png" />
@@ -510,10 +510,10 @@
 
 	//生成花瓣灰度图片
     function loadGrayPetal() {
-    	var petalUrl = "${contextPath}/petal/resource/img/petal.png";
-        var petal2Url = "${contextPath}/petal/resource/img/petal2.png";
-        var petal3Url = "${contextPath}/petal/resource/img/petal3.png";
-        var petal4Url = "${contextPath}/petal/resource/img/petal4.png";
+    	var petalUrl = "${contextPath}/petal/resource/img/text-petal.png";
+        var petal2Url = "${contextPath}/petal/resource/img/text-petal2.png";
+        var petal3Url = "${contextPath}/petal/resource/img/text-petal3.png";
+        var petal4Url = "${contextPath}/petal/resource/img/text-petal4.png";
         $('#petal .petal-img').attr('src', petalUrl);
         $('#petal2 .petal-img').attr('src', petal2Url);
         $('#petal3 .petal-img').attr('src', petal3Url);

@@ -154,6 +154,7 @@ public class PetalController {
 				beacon = null;
 				unlockCount = 4;
 			}
+			resultMap.put("unlocked", false);
 			resultMap.put("beacon", beacon);
 			resultMap.put("unlockCount", unlockCount);
 		} else {
