@@ -34,7 +34,7 @@ public class PetalController {
 	
 	private Logger logger = LoggerFactory.getLogger(PetalController.class);
 	
-	public static final boolean TEST_FLAG = false;
+	public static final boolean TEST_FLAG = true;
 	
 	@Resource
 	private ActivityService activityService;
