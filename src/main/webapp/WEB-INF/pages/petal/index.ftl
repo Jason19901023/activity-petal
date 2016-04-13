@@ -444,24 +444,31 @@
 <div style="display:none;">
 <div id="dialog-1">
 	<img class="petal-icon" src="${contextPath}/petal/resource/img/petal-icon.png" />
-	<p>您已成功收集到一枚花瓣。再收集一枚，花儿就开啦！</p>
-	<button class="dialog-btn" onclick="closeDialog()">确&nbsp;&nbsp;定</button>
+	<p>您已经成功收集一枚花瓣</p>
+	<p>可获得一个好礼</p>
+	<button class="dialog-btn" onclick="getLevelPrizeOfPetal()">领取奖品</button>
 </div>
 <div id="dialog-2">
 	<img class="petal-icon" src="${contextPath}/petal/resource/img/petal-icon.png" />
 	<p>您已成功使花儿绽放，点击领取属于您的奖品。</p>
 	<p>再集齐两朵花瓣还能召唤花神呢~</p>
-	<button class="dialog-btn" onclick="getPrizeOf2Petal()">领取奖品</button>
+	<button class="dialog-btn" onclick="getLevelPrizeOfPetal()">领取奖品</button>
 </div>
 <div id="dialog-3">
 	<img class="petal-icon" src="${contextPath}/petal/resource/img/petal-icon.png" />
 	<p>您已成功收集到三枚花瓣，再收集一枚，就能召唤花神啦！</p>
-	<button class="dialog-btn" onclick="closeDialog()">确&nbsp;&nbsp;定</button>
+	<button class="dialog-btn" onclick="getLevelPrizeOfPetal()">领取奖品</button>
 </div>
 <div id="dialog-4">
 	<img class="petal-icon" src="${contextPath}/petal/resource/img/colorful-petal-icon.png" />
-	<p>您已成功召唤花神，点击领取属于您的奖品！</p>
-	<button class="dialog-btn dialog-btn-especial" onclick="getPrizeOf4Petal()">领取奖品</button>
+	<p>您已成功收集到了四枚花瓣，召唤了花神，获得超级大奖。</p>
+	<button class="dialog-btn dialog-btn-especial" onclick="getLevelPrizeOfPetal()">领取奖品</button>
+</div>
+<div id="dialog-5">
+	<img class="petal-icon" src="${contextPath}/petal/resource/img/petal-icon.png" />
+	<p>很遗憾，您未中奖</p>
+	<p>还需要努力呦~</p>
+	<button class="dialog-btn" onclick="closeDialog()">确&nbsp;&nbsp;定</button>
 </div>
 </div>
 </body>
@@ -497,8 +504,8 @@
 		        title,
 		        'background-color:#E4FFCA; color:#666; height: 40px; line-height: 40px; border-radius: 5px 5px 0 0;'
 		    ],
-		    content: $('#'+contentDomId).html()	,
-		    style: 'color:#666; border:none; border-radius: 5px;',
+		    content: $('#'+contentDomId).html(),
+		    style: 'color:#666; border:none; border-radius: 5px; width:80%; max-width:600px;',
 		    shadeClose:false
 		});
 	}
@@ -561,6 +568,7 @@
 		});
     }
     
+    var level;
     //根据beacon解锁花瓣
     function unlockPetal(beacon, unlockCount) {
     	var num;
@@ -574,11 +582,13 @@
 	    	} else if(beacon=='D') {
 	    		num =  '4';
 	    	}
+	    	level = num==''?'1':num;
 	    	//alert('开始呈现解封动画');
 	    	$('#petal'+num+' .gray-petal-img').transition({'scale':0}, 2000);
 	    	$('#petal'+num+' .petal-img').transition({'opacity':1, 'scale':1, complete:function() {
 	    		//alert('解封动画呈现完毕');
 	    		if(unlockCount == 4) {
+	    			level = 0;
 	    			showColorful();
 	    		};
 	    		//alert('开始弹出对话框');
@@ -636,6 +646,21 @@
     	$.getJSON('${contextPath}/petal/lottery.do', {ticket:'${ticket!}', platformActivityId:'${(activity.platformActivityId)!}'}, function(data) {
 		 	var qr = data.qr;
 		 	window.location.href = " http://res.rtmap.com/image/vs3/share/detail.html?id="+qr;  
+		});
+    }
+    
+    //分级抽奖
+    function getLevelPrizeOfPetal() {
+    	$.getJSON('${contextPath}/petal/level_lottery.do', {level:level, openId:'${(data.openId)!}', platformActivityId:'${(activity.platformActivityId)!0}'}, function(data) {
+    		var errcode = data.errcode;
+    		var errmsg = data.errmsg;
+    		if((errcode==0) && (data.qr)) {		//中奖
+			 	window.location.href = " http://res.rtmap.com/image/vs3/share/detail.html?id="+data.qr;  
+    		} else if(errcode==7) {		//未中奖
+    			openDialog('温馨提示', 'dialog-5');
+    		} else {
+    			alert(errmsg);
+    		}
 		});
     }
     
