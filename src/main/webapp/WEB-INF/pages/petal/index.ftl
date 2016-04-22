@@ -38,7 +38,7 @@
         }
 
         .sub-title {
-            background:url('${contextPath}/petal/resource/img/sub-title.png');
+            background:url('${contextPath}/petal/resource/img/text-sub-title.png');
             background-repeat:no-repeat;
             background-size:auto 100%;
             background-position:center;
@@ -198,9 +198,13 @@
     			</#if>
     		</#list>
     	</#if>
-        
+    	
         .btn-area {
             height:25%;
+            background:url('${contextPath}/petal/resource/img/text.png');
+            background-repeat:no-repeat;
+            background-size:80% auto;
+            background-position:top center;
         }
 
         .logo {
@@ -530,10 +534,10 @@
         var grayPetal2Url = grayscale(petal2Url);
         var grayPetal3Url = grayscale(petal3Url);
         var grayPetal4Url = grayscale(petal4Url);*/
-        var grayPetalUrl = "${contextPath}/petal/resource/img/gray-petal.png";
-        var grayPetal2Url = "${contextPath}/petal/resource/img/gray-petal2.png";
-        var grayPetal3Url = "${contextPath}/petal/resource/img/gray-petal3.png";
-        var grayPetal4Url = "${contextPath}/petal/resource/img/gray-petal4.png";
+        var grayPetalUrl = "${contextPath}/petal/resource/img/text-gray-petal.png";
+        var grayPetal2Url = "${contextPath}/petal/resource/img/text-gray-petal2.png";
+        var grayPetal3Url = "${contextPath}/petal/resource/img/text-gray-petal3.png";
+        var grayPetal4Url = "${contextPath}/petal/resource/img/text-gray-petal4.png";
         $('#petal .gray-petal-img').attr('src', grayPetalUrl);
         $('#petal2 .gray-petal-img').attr('src', grayPetal2Url);
         $('#petal3 .gray-petal-img').attr('src', grayPetal3Url);

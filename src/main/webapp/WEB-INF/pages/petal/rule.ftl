@@ -61,7 +61,7 @@
         .petal-main {
             height:75%;
 			background-color:#C9F3B6;            
-			background-image:url('${contextPath}/petal/resource/img/rule-content2.png');
+			background-image:url('${contextPath}/petal/resource/img/text-rule-content2.png');
 			background-repeat:no-repeat;
             background-size:100% auto;
         }
