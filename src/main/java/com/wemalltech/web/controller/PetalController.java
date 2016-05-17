@@ -1,6 +1,5 @@
 package com.wemalltech.web.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -48,6 +47,8 @@ public class PetalController {
 	public static final String INT_BEACON = "http://101.200.197.234:8080/beaconzone/beacon/getBeaconZone?uuid={uuid}&major={major}&minor={minor}";
 	//抽奖接口
 	public static final String INT_LOTTERY = "http://182.92.31.114/rest/act/{id}/{ticket}";
+	//分级抽奖接口
+	public static final String INT_LEVEL_LOTTERY = "http://101.201.176.54/rest/act/level/{id}/{level}/{openId}";
 	
 	@RequestMapping("/test.do")
 	public ModelAndView test() {
@@ -87,6 +88,9 @@ public class PetalController {
 			}
 			model.put("testNum", testNum);
 			model.put("petalRecordList", petalRecordList);
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("openId", "openId");
+			model.put("data", data);
 			
 		} else {
 			String info = "";
@@ -154,6 +158,7 @@ public class PetalController {
 				beacon = null;
 				unlockCount = 4;
 			}
+			resultMap.put("unlocked", false);
 			resultMap.put("beacon", beacon);
 			resultMap.put("unlockCount", unlockCount);
 		} else {
@@ -217,6 +222,29 @@ public class PetalController {
 			String qr = (String) lotteryResponseMap.get("qr");
 			resultMap.put("qr", qr);
 		}
+		return resultMap;
+	}
+	
+	@RequestMapping("/level_lottery.do")
+	@ResponseBody
+	public Map<String, Object> levelLottery(@RequestParam(required=false) String openId,
+			@RequestParam(required=false) int platformActivityId,
+			@RequestParam(required=false) int level) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		LotteryCallback lotteryCallback = new LotteryCallback();
+		String lotteryUrl = INT_LEVEL_LOTTERY;
+		lotteryUrl = lotteryUrl.replace("{id}", String.valueOf(platformActivityId));
+		lotteryUrl = lotteryUrl.replace("{level}", String.valueOf(level));
+		lotteryUrl = lotteryUrl.replace("{openId}", openId);
+		if(TEST_FLAG) {
+			lotteryUrl = "http://101.201.176.54/rest/act/level/2120/0/openId";
+			resultMap.put("errcode", 7);
+			return resultMap;
+		}
+		NetWorkCenter.get(lotteryUrl, null, lotteryCallback);
+		Map<String, Object> lotteryResponseMap = lotteryCallback.responseMap;
+		resultMap.putAll(lotteryResponseMap);
 		return resultMap;
 	}
 	
