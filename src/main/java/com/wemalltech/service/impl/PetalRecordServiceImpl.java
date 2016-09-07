@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.stereotype.Service;
 
 import tk.mybatis.mapper.entity.Example;
@@ -53,6 +55,11 @@ public class PetalRecordServiceImpl  implements PetalRecordService {
 			return petalRecordList.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public void clearPetalRecord() {
+		petalRecordDao.clearPetalRecord();
 	}
 	
 }

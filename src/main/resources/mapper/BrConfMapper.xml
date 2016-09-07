@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wemalltech.dao.BrConfDao">
+	<resultMap id="brConfMap" type="BrConf">
+	  <result property="autoid" column="autoid"/>
+	  <result property="activityAutoid" column="activity_autoid"/>
+	  <result property="activityName" column="activity_name"/>
+	  <result property="platformActivityId01" column="platform_activity_id01"/>
+	  <result property="platformActivityId02" column="platform_activity_id02"/>
+	  <result property="platformActivityId03" column="platform_activity_id03"/>
+	  <result property="platformActivityId04" column="platform_activity_id04"/>
+	  <result property="tipText02" column="tip_text02"/>
+	  <result property="tipText03" column="tip_text03"/>
+	  <result property="probability04" column="probability04"/>
+	  <result property="timeInterval" column="time_interval"/>
+	  <result property="flag" column="flag"/>
+	</resultMap>
+
+	
+	<select id="getAllBrConfList"  resultMap="brConfMap" >
+		select bc.*, a.name as activity_name from br_conf bc left join activity a on bc.activity_autoid=a.autoid where bc.flag=0
+	</select>
+	
+</mapper>

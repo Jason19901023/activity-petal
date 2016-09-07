@@ -1,0 +1,5 @@
+*{margin: 0;padding: 0;}
+body{font-size: 62.5%;font-family: "SimHei", "Microsoft YaHei", "YouYuan", "arial";background: #e5504c;}
+img{vertical-align: bottom;}
+.wrap{width: 640px;height: 1048px;margin: 0 auto;position: relative;overflow: hidden;transform-origin: top left;-webkit-transform-origin: top left;}
+.wrap>img, .wrap>div{position: absolute;}

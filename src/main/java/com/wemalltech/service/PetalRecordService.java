@@ -10,4 +10,6 @@ public interface PetalRecordService {
 	public int unlockPetal(int activityAutoid, String openId, String beacon);
 
 	public PetalRecord getPetalRecordByActivityAutoidAndOpenIdAndBeacon(int activityAutoid, String openId, String beacon);
+
+	public void clearPetalRecord();
 }

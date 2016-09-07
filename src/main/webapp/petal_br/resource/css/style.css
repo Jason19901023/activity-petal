@@ -1,0 +1,44 @@
+*{margin: 0;padding: 0;}
+body{font-size: 62.5%;font-family: "SimHei", "Microsoft YaHei", "YouYuan", "arial";background: #e5504c;}
+img{vertical-align: bottom;}
+.wrap{width: 640px;height: 1048px;margin: 0 auto;position: relative;overflow: hidden;transform-origin: top left;-webkit-transform-origin: top left; ;}
+.wrap>img, .wrap>div{position: absolute;}
+
+.petal-wrapper {width:456px; height:440px; left:92px; top:266px; animation:rotate 20s linear 0.5s infinite; -webkit-animation:rotate 20s linear 0.5s infinite;}
+.petal-wrapper>.petal {position:absolute;}
+.petal-wrapper>.grey-petal {position:absolute; transform:scale(1,1); -webkit-transform:scale(1,1);  }
+.petal-wrapper>.light-petal {position:absolute; transform:scale(0,0); -webkit-transform:scale(0,0);  opacity: 0;}
+.petal-wrapper>.petal01 {left:0px; top:0px;}
+.petal-wrapper>.petal02 {left:224px; top:0px;}
+.petal-wrapper>.petal03 {left:0px; top:217px;}
+.petal-wrapper>.petal04 {left:224px; top:217px;}
+.my-card-btn {position:absolute; left:96px; bottom:145px;}
+.activity-rule-btn {position:absolute; right:96px; bottom:145px;}
+	
+@keyframes rotate {
+	from {transform:rotate(0deg);}
+     to {transform:rotate(360deg);}
+}
+
+@-webkit-keyframes rotate  {
+	from {-webkit-transform:rotate(0deg);}
+    to {-webkit-transform:rotate(360deg);}
+}
+	
+.wrap>.layer-ele {display:none;}
+body .layui-layer-br {border-radius:5px;}
+body .layui-layer-br  .layui-layer-content{}
+.dialog {}
+.dialog>.icon {margin:14px auto; display:block;}
+.dialog>.star01 {position:absolute; left:220px; top:25px;}
+.dialog>.star02 {position:absolute; left:131px; top:82px;}
+.dialog>p {font-size:26px; text-align:center; color:#7D7A75;}
+.dialog>.sub-title {font-size:32px; text-align:center; color:#7D7A75;}
+.dialog>.ok-btn{position:absolute; left:110px; bottom: 67px;}
+.dialog>.prize-btn {position:absolute; left:22px; bottom: 67px;}
+.dialog>.continue-btn {position:absolute; right:22px; bottom: 67px;}
+.dialog>.center-prize-btn{position:absolute; left:110px; bottom: 67px;}
+body .layui-layer-transparent {background-color:transparent; box-shadow:none;}
+body .layui-layer-transparent  .layui-layer-content{background-color:transparent;}
+.rule {position: relative; width:592px; height:957px; background-color:transparent;}
+.rule .rule_content {position: absolute; left:0px; top:0px;}

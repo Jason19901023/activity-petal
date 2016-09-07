@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wemalltech.dao.PetalRecordDao">
+
+	<update id="clearPetalRecord">
+		update petal_record set flag=1 where flag=0
+	</update>
+	
+</mapper>
